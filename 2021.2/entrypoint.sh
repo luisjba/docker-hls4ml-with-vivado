@@ -2,4 +2,4 @@
 
 vncserver -geometry ${GEOMETRY} :0
 
-/opt/Xilinx/Vivado/2021.2/bin/vivado
+/opt/Xilinx/Vivado/${VIVADO_ML_VERSION}/bin/vivado
