@@ -68,4 +68,5 @@ ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup \
 echo "Successfuly installed Vivado Ml ${VIVADO_ML_INSTALLATION_BASENAME}"
 echo "Deleting Instalation files from ${VIVADO_ML_INSTALLATION_SOURCE}"
 rm -rf ${VIVADO_ML_INSTALLATION_SOURCE}
+rm ${VIVADO_ML_INSTALLATION_FILE}
 echo "Finished removed installation files"
