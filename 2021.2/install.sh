@@ -40,11 +40,13 @@ if [ -z $VIVADO_ML_INSTALLATION_BASENAME ]; then
   >&2 echo "Invalid base name for installation file $VIVADO_ML_INSTALLATION_FILE ."
   exit 6
 fi
-# Extract Tar files in a tmp folder
 VIVADO_ML_INSTALLATION_SOURCE=/tmp/${VIVADO_ML_INSTALLATION_BASENAME}
-[ ! -d ${VIVADO_ML_INSTALLATION_SOURCE} ] && mkdir -p ${VIVADO_ML_INSTALLATION_SOURCE}
-echo "Extracting $VIVADO_ML_INSTALLATION_FILE into ${VIVADO_ML_INSTALLATION_SOURCE}"
-pv $VIVADO_ML_INSTALLATION_FILE | tar -xzf - --directory ${VIVADO_ML_INSTALLATION_SOURCE}
+# Check if tar file was already extracted
+if [ ! -d ${VIVADO_ML_INSTALLATION_SOURCE} ]; then
+  # Extract Tar files in a tmp folder
+  echo "Extracting $VIVADO_ML_INSTALLATION_FILE into ${VIVADO_ML_INSTALLATION_SOURCE}"
+  pv $VIVADO_ML_INSTALLATION_FILE | tar -xzf - --directory /tmp
+fi
 # check if xsetup exists
 if [ ! -f ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup ]; then
   >&2 echo "xsetup was not found in the installation directory: $VIVADO_ML_INSTALLATION_SOURCE"
