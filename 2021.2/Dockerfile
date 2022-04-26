@@ -23,24 +23,18 @@ COPY install_config.txt /opt/install_config.txt
 COPY install.sh /opt/install.sh
 COPY ${INSTALL_FILE} /opt/${INSTALL_FILE}
 
-# Execution permission to script files
-RUN chmod +x /opt/entrypoint.sh \
-    && chmod +x /opt/install.sh
-
 # Vivado ML Installation
-RUN df -ih \
-    && /opt/install.sh /opt/${INSTALL_FILE} \
-    && df -ih \
-    && rm -rf /tmp/.X*
+RUN chmod +x /opt/install.sh && /opt/install.sh /opt/${INSTALL_FILE} && rm -rf /tmp/.X*
 
 # Vivado user configuration
 RUN mkdir -p /home/vivado/.vnc \
-    && useradd -ms /bin/bash vivado \
-    && chown -R vivado /home/vivado \
-    && echo "source /opt/Xilinx/Vivado/${VIVADO_ML_VERSION}/settings64.sh" >> /home/vivado/.bashrc
+  && useradd -ms /bin/bash vivado \
+  && chown -R vivado /home/vivado \
+  && echo "source /opt/Xilinx/Vivado/${VIVADO_ML_VERSION}/settings64.sh" >> /home/vivado/.bashrc
 
 COPY xstartup /home/vivado/.vnc/xstartup
 COPY entrypoint.sh /opt/entrypoint.sh
+RUN chmod +x /opt/entrypoint.sh
 
 USER vivado
 WORKDIR /home/vivado
