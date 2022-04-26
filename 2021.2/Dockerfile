@@ -22,12 +22,12 @@ COPY xstartup /home/vivado/.vnc/xstartup
 COPY entrypoint.sh /opt/entrypoint.sh
 COPY ${INSTALL_FILE} /opt/${INSTALL_FILE}
 
+# Execution permission to script files
+RUN chmod +x /opt/entrypoint.sh \
+    && chmod +x /opt/install.sh
 
 # Vivado ML Installation
 RUN df -ih \
-    && mkdir -p /opt \
-    && chmod +x /opt/entrypoint.sh \
-    && chmod +x /opt/install.sh \
     && /opt/install.sh /opt/${INSTALL_FILE} \
     && df -ih \
     && rm -rf /tmp/.X* \
