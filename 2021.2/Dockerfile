@@ -31,7 +31,4 @@ WORKDIR /home/vivado
 ENV VIVADO_ML_VERSION 2021.2
 ENV VIVADO_ML_INSTALLATION_FILE /opt/install_file/Xilinx_Unified_2021.2_1021_0703.tar.gz
 
-ENV GEOMETRY 1920x1200
-ENV DISPLAY :0
-
 CMD ["/bin/bash", "xilinx_install"]
