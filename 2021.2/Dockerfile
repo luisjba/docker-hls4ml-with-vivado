@@ -6,7 +6,10 @@ LABEL mantainer="Jose Luis Bracamonte Amavizca <luisjba@gmail.com>"
 RUN apt-get update \
     &&  apt-get -y upgrade \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      build-essential default-jre xorg libxrender-dev libxtst-dev vnc4server twm pv vim sudo \
+      locales build-essential default-jre xorg libxrender-dev \
+      libxtst-dev vnc4server twm pv vim sudo \
+    && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+    && locale-gen \
     && apt-get clean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
