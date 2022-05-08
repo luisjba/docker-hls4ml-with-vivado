@@ -43,7 +43,6 @@ if [ ! -f ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup ]; then
 fi
 # Set the exucution permission to xsetup file
 chmod +x ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup
-# vncserver -geometry ${GEOMETRY} ${DISPLAY}
 echo "Installing VIVADO ML from $VIVADO_ML_INSTALLATION_SOURCE"
 ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup \
   --agree XilinxEULA,3rdPartyEULA \
