@@ -9,8 +9,8 @@ and should be 71.9 GB (make shure you have enough space in your drive).
 
 ## Build and 
 
-This `Dockerfile` is exclusive to install Vivado ML and you will use them only once. After installing, you can remove it to save space
-in your local drive.
+This `Dockerfile` is exclusive to install Vivado ML and you will use them only once. After installing, you can remove it to 
+save space in your local drive.
 
 ```bash
 cd 2021.2
@@ -19,9 +19,12 @@ docker buildx build --platform linux/amd64 -t vivado-2021.2_installer .
 
 ## Runnin the  Installer Docker Image
 
-Once the built of `vivado-2021.2_installer` image was completed successfully, we have to identify the installation file and the installation source directory. The instalation file is the tar.gz file donwloaded from Xilnx oficial site, as mentionen above (the file `~/Xilinx_Unified_2021.2_1021_0703.tar.gz`, located in my home directory). For the instalation source directory, you have to create one, in this example I created `Xilinx_source` in my home directory. When runnin the image, we have to mount two volumes,
-one for the instalation file into '/opt/install_file/Xilinx_Unified_2021.2_1021_0703.tar.gz' and the source fildirectory
-to `/opt/source`.
+Once the built of `vivado-2021.2_installer` image was completed successfully, we have to identify the installation file and 
+the installation source directory. The instalation file is the tar.gz file donwloaded from Xilnx oficial site, as mentionen 
+above (the file `~/Xilinx_Unified_2021.2_1021_0703.tar.gz`, located in my home directory). For the instalation source directory, 
+you have to create one, in this example I created `Xilinx_source` in my home directory. When runnin the image, we have to 
+mount two volumes,one for the instalation file into '/opt/install_file/Xilinx_Unified_2021.2_1021_0703.tar.gz' and the source 
+fildirectory to `/opt/source`.
 
 For my example, the run command is as follows:
 ```bash
@@ -31,4 +34,6 @@ docker run --rm -it \
     -v ~/Xilinx:/opt/Xilinx:rw \
     vivado-2021.2_installer
 ```
-The installation proccess take a while. Once the installation finished successfuly, you are ready to exeute Vivao ML in a light weight Docker image, go to the [Build Docker Image Runner for Vivado ML](../../README.md) section and follow the instructions.
+The installation proccess take a while. Once the installation finished successfuly, you are ready to exeute 
+Vivao ML in a light weight Docker image, go to the [Build Docker Image Runner for Vivado ML](../../README.md) 
+section and follow the instructions.
