@@ -5,7 +5,7 @@ based from [https://github.com/phwl/docker-vivado/tree/master/2021.2](https://gi
 and [https://github.com/aperloff/vivado-docker](https://github.com/aperloff/vivado-docker), but with some modifications to support 
 the latest version Vivado ML 2021.2_1021_0703.
 
-We have created a Installation Docker file to perform only the installation part. The Installation process is designed to
+We have created an Installation Docker file to perform only the installation part. The Installation process is designed to
 use a volume in you local computer in order to be used in the Docker image to execute the software. Because the installation is
 so huge in space and (80 GB approx) and Docker image must not be so big and must kept as light as possible.
 
