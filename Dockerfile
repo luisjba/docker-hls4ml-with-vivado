@@ -14,8 +14,8 @@ RUN apt-get update \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
 
-COPY entrypoint.sh /tmp/
-COPY vnc_xstartup /tmp/
+COPY scripts/entrypoint.sh /tmp/
+COPY config/vnc_xstartup /tmp/
 
 # Vivado user setup, entrypoint and xtartup configuration
 RUN mv /tmp/entrypoint.sh /usr/local/bin/xilinx_entrypoint \
