@@ -38,5 +38,5 @@ docker run --rm -it \
     vivado-2020.1_installer
 ```
 The installation process takes a while. Once the installation is successfully finished, you are able to execute 
-Vivado ML in a light weight Docker image, go to the [Build Docker Image Runner for Vivado ML](../../README.md) 
+Vivado ML in a light weight Docker image, go to the [Build Docker Image Runner for Vivado ML](../README.md) 
 section and follow the instructions.
