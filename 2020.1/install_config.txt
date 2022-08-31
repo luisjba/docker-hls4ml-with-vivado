@@ -1,5 +1,5 @@
-#### Vivado ML Edition Install Configuration ####
-Edition=Vivado ML Standard
+#### Vivado HL WebPACK Install Configuration ####
+Edition=Vitis Unified Software Platform
 
 Product=Vivado
 
@@ -7,10 +7,11 @@ Product=Vivado
 Destination=/opt/Xilinx
 
 # Choose the Products/Devices the you would like to install.
-Modules=Zynq UltraScale+ MPSoC:1,Virtex UltraScale+ 58G:0,Virtex UltraScale+ 58G ES:0,Versal Prime Series ES1:0,Zynq-7000:0,Kintex UltraScale+:0,Artix UltraScale+:0,Spartan-7:0,Versal AI Edge Series:0,Versal Premium Series ES1:0,Artix-7:1,Versal AI Core Series ES1:0,Versal Prime Series:0,DocNav:1,Virtex UltraScale+ HBM:0,Kintex-7:0,Virtex UltraScale+:0,Versal AI Core Series:0,Vitis Model Composer(Xilinx Toolbox for MATLAB and Simulink. Includes the functionality of System Generator for DSP):1,Kintex UltraScale:0,Virtex UltraScale:0,Versal HBM Series ES1:0,Zynq UltraScale+ RFSoC:0,Virtex-7:0,Install Devices for Kria SOMs and Starter Kits:0,Virtex UltraScale+ HBM ES:0,Versal AI Edge Series ES1:0,Zynq UltraScale+ RFSoC ES:0,Engineering Sample Devices:0
+# Modules=Virtex UltraScale+ HBM:1,Zynq UltraScale+ MPSoC:1,DocNav:1,Kintex UltraScale:1,Zynq-7000:1,System Generator for DSP:0,Virtex UltraScale+:1,Kintex UltraScale+:1,Model Composer:0
+Modules=Zynq UltraScale+ MPSoC:1,DocNav:1,Zynq-7000:1,System Generator for DSP:0,Model Composer:0
 
 # Choose the post install scripts you'd like to run as part of the finalization step. Please note that some of these scripts may require user interaction during runtime.
-InstallOptions=Acquire or Manage a License Key:0,Enable WebTalk for SDK to send usage statistics to Xilinx:1,Enable WebTalk for Vivado to send usage statistics to Xilinx (Always enabled for WebPACK license):0
+InstallOptions=
 
 ## Shortcuts and File associations ##
 # Choose whether Start menu/Application menu shortcuts will be created or not.
