@@ -16,7 +16,8 @@ save space in your local drive.
 
 ```bash
 cd 2020.1
-docker buildx build --platform linux/amd64 -t vivado-2020.1_installer . 
+VIVADO_ML_VERSION='2020.1'
+docker buildx build --platform linux/amd64 -t vivado-${VIVADO_ML_VERSION}_installer . 
 ```
 
 ## Running the  Installer Docker Image
@@ -30,12 +31,15 @@ file directory to `/opt/source`.
 
 For my example, the run command is as follows:
 ```bash
+VIVADO_ML_VERSION='2020.1'
+VIVADO_ML_INSTALLATION_FILE_NAME=Xilinx_Unified_2020.1_0602_1208.tar.gz
 docker run --rm -it \
-    -v ~/Xilinx_Unified_2020.1_0602_1208.tar.gz:/opt/install_file/Xilinx_Unified_2020.1_0602_1208.tar.gz \
+    -v ~/${VIVADO_ML_INSTALLATION_FILE_NAME}:/opt/install_file/${VIVADO_ML_INSTALLATION_FILE_NAME} \
     -v ~/Xilinx_source:/opt/source:rw \
-    -v ~/Xilinx:/opt/Xilinx:rw \
-    -e VIVADO_ML_VERSION='2020.1' \
-    vivado-2020.1_installer
+    -v ~/Xilinx/${VIVADO_ML_VERSION}:/opt/Xilinx:rw \
+    -e VIVADO_ML_VERSION="${VIVADO_ML_VERSION}" \
+    -e VIVADO_ML_INSTALLATION_FILE="/opt/install_file/${VIVADO_ML_INSTALLATION_FILE_NAME}" \
+    vivado-${VIVADO_ML_VERSION}_installer
 ```
 The installation process takes a while. Once the installation is successfully finished, you are able to execute 
 Vivado ML in a light weight Docker image, go to the [Build Docker Image Runner for Vivado ML](../README.md) 
