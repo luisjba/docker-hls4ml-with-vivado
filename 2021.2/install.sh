@@ -5,7 +5,7 @@
 # 
 # MAINTAINER: Jose Luis Bracamonte Amavizca. <luisjba@gmail.com>
 # Date Created: 2022-04-24
-# Las Updated: 2022-04-27
+# Las Updated: 2022-08-31
 
 # VIVADO_ML_INSTALLATION_FILE=${1%/}
 VIVADO_ML_CONFIG_FILE=/opt/install_config.txt
