@@ -34,6 +34,7 @@ docker run --rm -it \
     -v ~/Xilinx_Unified_2020.1_0602_1208.tar.gz:/opt/install_file/Xilinx_Unified_2020.1_0602_1208.tar.gz \
     -v ~/Xilinx_source:/opt/source:rw \
     -v ~/Xilinx:/opt/Xilinx:rw \
+    -e VIVADO_ML_VERSION='2020.1' \
     vivado-2020.1_installer
 ```
 The installation process takes a while. Once the installation is successfully finished, you are able to execute 
