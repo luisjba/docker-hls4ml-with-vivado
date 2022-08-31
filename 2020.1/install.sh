@@ -45,7 +45,7 @@ fi
 chmod +x ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup
 echo "Installing VIVADO ML from $VIVADO_ML_INSTALLATION_SOURCE"
 ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup \
-  --agree XilinxEULA,3rdPartyEULA \
+  --agree XilinxEULA,3rdPartyEULA,WebTalkTerms \
   --batch Install \
   --config ${VIVADO_ML_CONFIG_FILE}
 if [ $? -gt 0 ]; then
