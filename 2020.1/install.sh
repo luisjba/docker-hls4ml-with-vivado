@@ -41,6 +41,9 @@ if [ ! -f ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup ]; then
   >&2 echo "xsetup was not found in the installation directory: $VIVADO_ML_INSTALLATION_SOURCE"
   exit 5
 fi
+if [ "$START_VNC_SERVER" = "ON" ]; then
+  vncserver -geometry ${GEOMETRY} ${DISPLAY}
+fi
 # Set the exucution permission to xsetup file
 chmod +x ${VIVADO_ML_INSTALLATION_SOURCE}/xsetup
 echo "Installing VIVADO ML from $VIVADO_ML_INSTALLATION_SOURCE"

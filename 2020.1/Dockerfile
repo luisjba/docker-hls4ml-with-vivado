@@ -6,7 +6,7 @@ LABEL mantainer="Jose Luis Bracamonte Amavizca <luisjba@gmail.com>"
 RUN apt-get update \
     &&  apt-get -y upgrade \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      locales build-essential default-jre xorg libxrender-dev \
+      ca-certificates locales build-essential default-jre xorg libxrender-dev \
       libxtst-dev vnc4server twm pv vim sudo \
     && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen \
@@ -30,5 +30,8 @@ WORKDIR /home/vivado
 
 ENV VIVADO_ML_VERSION 2020.1
 ENV VIVADO_ML_INSTALLATION_FILE /opt/install_file/Xilinx_Unified_2020.1_0602_1208.tar.gz
+ENV GEOMETRY 1920x1200
+ENV DISPLAY :0
+ENV START_VNC_SERVER OFF
 
 CMD ["/bin/bash", "xilinx_install"]
