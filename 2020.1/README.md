@@ -20,6 +20,8 @@ VIVADO_ML_VERSION='2020.1'
 docker buildx build --platform linux/amd64 -t vivado-${VIVADO_ML_VERSION}_installer . 
 ```
 
+NOTE: if there is already a build cache in docker, you can remove it with the command: `docker builder prune`.
+
 ## Running the  Installer Docker Image
 
 Once the built of `vivado-2020.1_installer` image is successfully completed, we have to identify the installation file and 
@@ -34,9 +36,12 @@ For my example, the run command is as follows:
 VIVADO_ML_VERSION='2020.1'
 VIVADO_ML_INSTALLATION_FILE_NAME=Xilinx_Unified_2020.1_0602_1208.tar.gz
 docker run --rm -it \
+    --name vivado \
     -v ~/${VIVADO_ML_INSTALLATION_FILE_NAME}:/opt/install_file/${VIVADO_ML_INSTALLATION_FILE_NAME} \
     -v ~/Xilinx_source:/opt/source:rw \
     -v ~/Xilinx/${VIVADO_ML_VERSION}:/opt/Xilinx:rw \
+    -p 5900:5900 \
+    -e START_VNC_SERVER=ON \
     -e VIVADO_ML_VERSION="${VIVADO_ML_VERSION}" \
     -e VIVADO_ML_INSTALLATION_FILE="/opt/install_file/${VIVADO_ML_INSTALLATION_FILE_NAME}" \
     vivado-${VIVADO_ML_VERSION}_installer
