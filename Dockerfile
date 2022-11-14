@@ -87,6 +87,8 @@ RUN conda create --copy --name ${CONDA_ENV_NAME} python=${CONDA_PYTHON_VERSION} 
 # Install jupyter notebbok
 RUN conda install jupyter --name ${CONDA_ENV_NAME} -y --quiet
 
+# Install hls4ml
+RUN conda install hls4ml hls4ml[profiling] -c conda-forge --name ${CONDA_ENV_NAME} -y --quiet
 
 COPY scripts/entrypoint.sh /tmp/
 COPY scripts/vivado-start.sh /tmp/
@@ -114,6 +116,11 @@ RUN mv /tmp/entrypoint.sh /usr/local/bin/xilinx_entrypoint && \
 USER vivado
 ENV HOME /home/vivado
 WORKDIR /home/vivado
+
+# Configure startup bash rc
+RUN cp /etc/skel/.bashrc .bashrc && \
+  echo "source /opt/Xilinx/Vivado/*/settings64.sh" >> .bashrc && \
+  echo "source activate ${CONDA_ENV_NAME}" >> .bashrc
 
 ENV CONDA_ENV_NAME=$CONDA_ENV_NAME
 ENV PORT 8888
