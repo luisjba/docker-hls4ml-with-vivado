@@ -1,16 +1,17 @@
-# Vivado ML with HLS4ML - Dockerized implementation for Mac and Ubuntu
+# Python hls4ml with Vivado ML and jupyter - Dockerized implementation for Mac and Ubuntu
 
 # Table of contents
 1. [Introduction](#introduction)
-2. [Installing Vivado ML](#installing-vivado-ml)
-3. [Build Docker image for hs4ml with Vivado](#build-docker-image-for-hs4ml-with-vivado)
-4. [Run Docker image hls4ml with Vivado](#run-docker-image-hls4ml-with-vivado)
+2. [Downloading project](#introduction)
+3. [Installing Vivado ML](#installing-vivado-ml)
+4. [Build Docker image for hs4ml with Vivado](#build-docker-image-for-hs4ml-with-vivado)
+5. [Run Docker image hls4ml with Vivado](#run-docker-image-hls4ml-with-vivado)
     - [Run Vivado GUI using X11](#run-vivado-gui-using-x11)
         - [Run with localhost ip](#run-with-localhost-ip)
         - [Run using same ip address (the en0 Mac wifi interface)](#run-using-same-ip-address-the-en0-mac-wifi-interface)
     - [Run Vivado GUI and connect via VNC](#run-vivado-gui-and-connect-via-vnc)
-5. [Run Jupyter Notebook](#run-jupyter-notebook)
-6. [Alternate Entrypoint](#alternate-entrypoint)
+6. [Run Jupyter Notebook](#run-jupyter-notebook)
+7. [Alternate Entrypoint](#alternate-entrypoint)
 
 ## Introduction
 
@@ -26,6 +27,26 @@ and execute them to perform the installation saved in our local computer (mounti
 In a Second Step, we have to create a second Docker image to execute our installed Vivado ML version mounting the
 volume containing the installation of Vivado ML.
 
+
+## Downloading project
+
+In order to follow the next steps, you have to download this repository in your local computer, I usually have a `Projects` folder 
+in which a place all projects repositories (fell free to use the one you desire) and for propose of thi documentations I am
+going to refer to this directory as part of the location of the downloaded repository.
+
+Download the repo.
+```bash
+# Move to the project directory
+cd ~/Projects
+
+# Clone the repo
+git clone https://github.com/luisjba/docker-hls4ml-with-vivado.git
+
+# Enter into the downloaded repository folder
+cd docker-hls4ml-with-vivado
+```
+
+Now, you can go to the next steps to install Vivado or build the runner image if you already have Vivado installed.
 
 ## Installing Vivado ML
 
