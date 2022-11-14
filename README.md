@@ -8,6 +8,7 @@
 5. [Run Docker image hls4ml with Vivado](#run-docker-image-hls4ml-with-vivado)
     - [Run Vivado GUI using X11](#run-vivado-gui-using-x11)
         - [Run with localhost ip](#run-with-localhost-ip)
+        - [Run with local ip and connect a volume with a Vivado Project](#run-with-local-ip-and-connect-a-volume-with-a-vivado-project)
         - [Run using same ip address (the en0 Mac wifi interface)](#run-using-same-ip-address-the-en0-mac-wifi-interface)
     - [Run Vivado GUI and connect via VNC](#run-vivado-gui-and-connect-via-vnc)
 6. [Run Jupyter Notebook](#run-jupyter-notebook)
@@ -153,9 +154,30 @@ docker run --rm -it \
     hls4ml-with-vivado-${VIVADO_ML_VERSION} vivado-start my_script.tcl
 ```
 
+### Run with local ip and connect a volume with a Vivado Project
+
+To use Vivado IDe and open a project you have in your local, you can connect it via volume into `/home/vivado/work` 
+container directory. For demo propose I have in my local computer a vivado project with keras example in 
+`~/Projects/MCD/hls-keras-example`, use yours to map it as volume.
+
+```bash
+xhost + 127.0.0.1
+VIVADO_ML_VERSION='2020.1'
+docker run --rm -it \
+    --name hls4ml-with-vivado-gui \
+    --net=host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v ~/Xilinx/${VIVADO_ML_VERSION}:/opt/Xilinx:ro \
+    -v ~/Projects/MCD/hls-keras-example:/home/vivado/work:rw \
+    -e DISPLAY=host.docker.internal:0 \
+    hls4ml-with-vivado-${VIVADO_ML_VERSION} vivado-start
+```
+
 #### Run using same ip address (the en0 Mac wifi interface)
 
-This is a less secure method of connecting the remote program to the X11 system on the host. This is because you are allowing the remote system to access the internet and then connect to your system's external IP address. While the `xhost` command does limit the connections to just that one address, this is still note the best practice and may get you booted off the network at final.
+This is a less secure method of connecting the remote program to the X11 system on the host. This is because you are allowing 
+the remote system to access the internet and then connect to your system's external IP address. While the `xhost` command does 
+limit the connections to just that one address, this is still note the best practice and may get you booted off the network at final.
 
 To capture the IP for the interface and store into the `IP` variable we can use the `ifconfig en0` to lookup 
 for the interface information and add extra commands (`grep` and `awk`) to get the ip value. In the first
