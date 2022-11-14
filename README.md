@@ -1,5 +1,19 @@
 # Vivado ML with HLS4ML - Dockerized implementation for Mac and Ubuntu
 
+# Table of contents
+1. [Introduction](#introduction)
+2. [Installing Vivado ML](#installing-vivado-ml)
+3. [Build Docker image for hs4ml with Vivado](#build-docker-image-for-hs4ml-with-vivado)
+4. [Run Docker image hls4ml with Vivado](#run-docker-image-hls4ml-with-vivado)
+    - [Run Vivado GUI using X11](#run-vivado-gui-using-x11)
+        - [Run with localhost ip](#run-with-localhost-ip)
+        - [Run using same ip address (the en0 Mac wifi interface)](#run-using-same-ip-address-the-en0-mac-wifi-interface)
+    - [Run Vivado GUI and connect via VNC](#run-vivado-gui-and-connect-via-vnc)
+5. [Run Jupyter Notebook](#run-jupyter-notebook)
+6. [Alternate Entrypoint](#alternate-entrypoint)
+
+## Introduction
+
 This project is intended to create a dockerize installation for Vivado ML in a Mac or Ubuntu with the library HLS4ML.
 The current implementation is based from 
 [https://github.com/phwl/docker-vivado/tree/master/2021.2](https://github.com/phwl/docker-vivado/tree/master/2021.2) 
@@ -12,10 +26,11 @@ and execute them to perform the installation saved in our local computer (mounti
 In a Second Step, we have to create a second Docker image to execute our installed Vivado ML version mounting the
 volume containing the installation of Vivado ML.
 
-## Step 1 - Installing Vivado ML
+
+## Installing Vivado ML
 
 If you already have the installation files in you computer (Ubuntu based installation), you can skip this step and go directly to
-the [Step 2 - Build Docker image for hs4ml with Vivado](#step-2---build-docker-image-for-hs4ml-with-vivado) section.
+the [Build Docker image for hs4ml with Vivado](#build-docker-image-for-hs4ml-with-vivado) section.
 
 To install Vivao ML, we have the following versions available, pick one only one and follow the corresponding instructions.
 
@@ -25,11 +40,10 @@ To install Vivao ML, we have the following versions available, pick one only one
 
 To install Vivado, please follow the instruction [Install Vivado ML version 2020.1](2020.1/README.md).
 
-## Step 2 - Build Docker image for hs4ml with Vivado
+## Build Docker image for hs4ml with Vivado
 
 Open your terminal and move to the project directory, the one that have the folders `config` and `scripts`.
 Run the build command with the parameters and selected version for Vivado.
-
 
 ```bash
 VIVADO_ML_VERSION='2020.1'
@@ -40,11 +54,12 @@ docker buildx build --platform linux/amd64 \
     -t hls4ml-with-vivado-${VIVADO_ML_VERSION} .
 ```
 
-## Step3 - Using the created image to run hls4ml with Vivado
+## Run Docker image hls4ml with Vivado
 
-Based on the Vivado version you picked in the [Step 1](#step-1---installing-vivado-ml), you have to locate the installation directory in your
+Based on the Vivado version you picked in above section [Installing Vivado ML](#installing-vivado-ml), 
+you have to locate the installation directory in your
 computer, in this implementation we have used the directory `~/Xilinx` and we are going to mount it as volume when executing the
-generated image in the [Step 2](#step-2---build-docker-image-for-hs4ml-with-vivado) to be able to run the image with X11 or VNC.
+generated image in the section [Build Docker image for hs4ml with Vivado](#build-docker-image-for-hs4ml-with-vivado) to be able to run the image with X11 or VNC.
 
 ### Run Vivado GUI using X11
 
@@ -57,7 +72,7 @@ this option wasn't enabled.
 To add ip addresses to to the list of acceptable connection whe should execute `xhost + 127.0.0.1` for localhost and
 `xhost + $(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')` for same ip address of the wifi interface (in a mac).
 
-#### Run it with localhost ip
+#### Run with localhost ip
 
 After running the `vivado-start` command at the end of all docker parameters, the GUI of Vivado program will be open automatically. 
 Note we have to add localhost address with `xhost + 127.0.0.1`, map `.x11-unix` and Vivado ML installation folder 
@@ -117,7 +132,7 @@ docker run --rm -it \
     hls4ml-with-vivado-${VIVADO_ML_VERSION} vivado-start my_script.tcl
 ```
 
-#### Run it using same ip address (the en0 Mac wifi interface)
+#### Run using same ip address (the en0 Mac wifi interface)
 
 This is a less secure method of connecting the remote program to the X11 system on the host. This is because you are allowing the remote system to access the internet and then connect to your system's external IP address. While the `xhost` command does limit the connections to just that one address, this is still note the best practice and may get you booted off the network at final.
 
@@ -168,12 +183,17 @@ docker run --rm -it \
 ## Run Jupyter Notebook
 
 For jupyter notebook, the server by default starts in the port 8888, but can be configured by `PORT` environment variable.
+---
+**NOTE:** we are mapping our host port to 8080. Jupyter is accessible 
+from http://127.0.0.1:8080/?token=<token>
+---
 
 ```bash
 VIVADO_ML_VERSION='2020.1'
 docker run --rm -it \
     --name hls4ml-with-vivado-jnb \
-    -p 8888:8888 \
+    --net=host \
+    -p 8080:8888 \
     -v ~/Xilinx/${VIVADO_ML_VERSION}:/opt/Xilinx:ro \
     hls4ml-with-vivado-${VIVADO_ML_VERSION} jupyter-start
 ```
@@ -186,7 +206,7 @@ in `~/Projects/MCD/hls-keras-example`, use yours when running it.
 VIVADO_ML_VERSION='2020.1'
 docker run --rm -it \
     --name hls4ml-with-vivado-jnb \
-    -p 8888:8888 \
+    -p 8080:8888 \
     -v ~/Xilinx/${VIVADO_ML_VERSION}:/opt/Xilinx:ro \
     -v ~/Projects/MCD/hls-keras-example:/home/vivado/work:rw \
     hls4ml-with-vivado-${VIVADO_ML_VERSION} jupyter-start
