@@ -28,6 +28,9 @@ if [ ! -f ${VIVADO_EXEC} ]; then
   >&2 echo "Vivado ML instalation not found in $VIVADO_EXEC"
   exit 1
 fi
+VIVADO_SHELL_SOURCE_FILE=${VIVADO_ML_HOME_DIR}/Vivado/${VIVADO_ML_VERSION}/settings64.sh
+echo "Loading Vivado setting file: ${VIVADO_SHELL_SOURCE_FILE}"
+source ${VIVADO_SHELL_SOURCE_FILE}
 if [ "$START_VNC_SERVER" = "ON" ]; then
   vncserver -geometry ${GEOMETRY} ${DISPLAY}
 fi

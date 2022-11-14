@@ -3,11 +3,7 @@
 # This Script is tu run Vivado ML with the different modes gui|tcl|batch
 # script_file required only for batch mode
 script_file=$1
-VIVADO_SHELL_SOURCE_FILE=${VIVADO_ML_HOME_DIR}/Vivado/${VIVADO_ML_VERSION}/settings64.sh
 vivado_executor=${VIVADO_ML_HOME_DIR}/Vivado/${VIVADO_ML_VERSION}/bin/vivado
-if [ ! -f ${HOME}/.bashrc ] || [ -z "$(grep $VIVADO_SHELL_SOURCE_FILE ${HOME}/.bashrc )" ]; then 
-  source ${VIVADO_SHELL_SOURCE_FILE}
-fi
 if [ "$VIVADO_MODE" = "batch" ]; then
   # check the script file 
   if [ -z $script_file ]; then 
