@@ -85,7 +85,7 @@ RUN conda create --copy --name ${CONDA_ENV_NAME} python=${CONDA_PYTHON_VERSION} 
   conda install -c anaconda keras scikit-learn h5py pyyaml --name ${CONDA_ENV_NAME} -y
 
 # Install jupyter notebbok
-RUN conda install -c conda-forge jupyterlab --name ${CONDA_ENV_NAME} -y --quiet
+RUN conda install jupyter --name ${CONDA_ENV_NAME} -y --quiet
 
 
 COPY scripts/entrypoint.sh /tmp/
